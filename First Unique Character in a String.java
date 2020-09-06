@@ -1,5 +1,7 @@
 class Solution {
     public int firstUniqChar(String s) {
+        //Time efficiency: O(N)
+        //Space efficiency: O(1), both HashMap and HashSet will have a max size of 26
         HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             map.put(s.charAt(i), i);
