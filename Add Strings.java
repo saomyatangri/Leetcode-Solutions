@@ -14,8 +14,8 @@ class Solution {
         boolean carry = false;
         
         for (int i = 0; i < max; i++) {
-            int val1 = (p1 >= 0) ? n1[p1] - 48 : 0;
-            int val2 = (p2 >= 0) ? n2[p2] - 48 : 0;
+            int val1 = (p1 >= 0) ? n1[p1] - '0' : 0;
+            int val2 = (p2 >= 0) ? n2[p2] - '0' : 0;
             int sum = val1+val2;
             sum = carry ? sum+1 : sum;
             output[p3] = sum%10;
