@@ -7,8 +7,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             Integer wantedKey = map.get(target-nums[i]);
             if (wantedKey != null) {
-                int[] output = {wantedKey, i};
-                return output;
+                return new int[]{wantedKey, i};
             }
             map.put(nums[i], i);
         }
