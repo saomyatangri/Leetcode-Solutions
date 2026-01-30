@@ -14,10 +14,10 @@ class Solution {
             adjacencyList.get(v).add(u);
         }
 
-        return DFS(adjacencyList, visited, source, destination, n);
+        return DFS(adjacencyList, visited, source, destination);
     }
 
-    private boolean DFS(Map<Integer, Set<Integer>> adjacencyList, Set<Integer> visited, int source, int destination, int n) {
+    private boolean DFS(Map<Integer, Set<Integer>> adjacencyList, Set<Integer> visited, int source, int destination) {
         if (source == destination) {
             //success case, path exists
             return true;
@@ -25,7 +25,7 @@ class Solution {
         visited.add(source);
         for (Integer node : adjacencyList.get(source)) {
             if (!visited.contains(node)) {
-                if (DFS(adjacencyList, visited, node, destination, n)) {
+                if (DFS(adjacencyList, visited, node, destination)) {
                     return true;
                 }
             }
