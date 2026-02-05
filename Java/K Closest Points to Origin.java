@@ -1,30 +1,25 @@
 class Solution {
-    public int[][] kClosest(int[][] points, int K) {
-        TreeMap<Double, ArrayList<int[]>> map = new TreeMap<>();
-        for (int[] coordinate : points) {
-            int x = coordinate[0];
-            int y = coordinate[1];
-            double distance = Math.sqrt((x*x)+(y*y));
-            if (map.containsKey(distance)) {
-                map.get(distance).add(coordinate);
-            } else {
-                ArrayList<int[]> temp = new ArrayList<>();
-                temp.add(coordinate);
-                map.put(distance, temp);
-            }
-        }
-        
-        int[][] result = new int[K][2];
-        int index = 0;
+    public int[][] kClosest(int[][] points, int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a,b) -> {
+            // Use squared distance instead of Euclidean distance
+            // sqrt() is monotonic so it doesn't affect ordering
+            int da = (a[0]*a[0]) + (a[1]*a[1]);
+            int db = (b[0]*b[0]) + (b[1]*b[1]);
+            return Integer.compare(db, da);
+        });
 
-        for (double key : map.keySet()) {
-            for (int i = 0; i < map.get(key).size(); i++) {
-                if (index == K) break;
-                result[index] = map.get(key).get(i);
-                index++;
-            }
-            
+        for (int[] point : points) {
+            pq.offer(point);
+            if (pq.size() > k) pq.poll();
         }
-        return result;
+
+        int[][] output = new int[k][2];
+        int i = 0;
+        while (!pq.isEmpty()) {
+            output[i] = pq.poll();
+            i++;
+        }
+
+        return output;
     }
 }
